@@ -558,7 +558,7 @@ Mix_Music* LoadMusic(const char* datafile )
 { 
   Mix_Music* temp_music = NULL;
   char fn[FNLEN];
-
+	//char fn[8192];
   /* First look under theme path if desired: */
   if (!settings.use_english)
   {
@@ -572,7 +572,9 @@ Mix_Music* LoadMusic(const char* datafile )
   if (!temp_music)
   {
     sprintf(fn , "%s/sounds/%s", settings.default_data_path, datafile);
+	//Mix_SetMusicCMD("cvlc --play-and-exit");
     temp_music = Mix_LoadMUS(fn);
+	 //Mix_SetMusicCMD(NULL);
     return temp_music;
   }
   // We never want to get here...

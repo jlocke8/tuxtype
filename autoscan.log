@@ -1,0 +1,32 @@
+autoscan: warning: missing AC_CHECK_FUNCS([iswprint]) wanted by: 
+	src/playgame.c:1768
+	src/playgame.c:1769
+autoscan: warning: missing AC_CHECK_FUNCS([strrchr]) wanted by: 
+	src/loaders.c:282
+autoscan: warning: missing AC_C_RESTRICT wanted by: 
+	src/compiler.h:97
+autoscan: warning: missing AC_FUNC_MALLOC wanted by: 
+	src/practice.c:1775
+	src/practice.c:1847
+	src/gettext.h:201
+	src/gettext.h:247
+	src/loaders.c:465
+	src/loaders.c:483
+	src/mysetenv.c:49
+	src/braille.c:35
+	src/braille.c:36
+	src/scripting.c:568
+	src/scripting.c:608
+	src/scripting.c:1160
+	src/input_methods.c:613
+	src/scandir.c:115
+	src/scandir.c:131
+	src/scandir.c:207
+	src/scandir.c:252
+	src/SDL_extras.c:1509
+autoscan: warning: missing AC_FUNC_REALLOC wanted by: 
+	src/input_methods.c:507
+	src/scandir.c:153
+autoscan: warning: missing AM_GNU_GETTEXT wanted by: 
+	src/gettext.h:133
+	src/gettext.h:208

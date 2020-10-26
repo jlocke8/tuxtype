@@ -39,7 +39,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "SDL_extras.h"
 
 //definitions
-#define FISHY_FONT_SIZE 32
+#define FISHY_FONT_SIZE 155
 #define LABEL_FONT_SIZE 20
 //space between each status bar element in cascade
 #define GRAPHIC_SPACE 4
@@ -49,8 +49,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define CONGRATS_FRAMES	2	//number of frames for congrats animation
 #define OH_NO_FRAMES 1	//number of frames for "oh no!" losing animation
 #define MAX_END_FRAMES_BETWEEN_LEVELS 350	//number of frames between levels
-#define MAX_END_FRAMES_WIN_GAME 750	//number of frames at ending animation
-#define MAX_END_FRAMES_GAMEOVER 400	//number of frames at game over
+#define MAX_END_FRAMES_WIN_GAME 75	//number of frames at ending animation
+#define MAX_END_FRAMES_GAMEOVER 40	//number of frames at game over
 #define END_FRAME_DY 2	//rise speed of ending animation text
 #define WIN_GAME_XAMP 4	//the xamplitide of winning game text circular motion
 #define WIN_GAME_YAMP 4	//the yamplitude of winning game text circular motion
@@ -64,8 +64,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //tux default walking & running speeds
 #define WALKING_SPEED	5
 //#define WALKING_SPEED         1
-#define MIN_RUNNING_SPEED		4 * WALKING_SPEED
-#define MAX_RUNNING_SPEED		10 * WALKING_SPEED
+#define MIN_RUNNING_SPEED		10 * WALKING_SPEED
+#define MAX_RUNNING_SPEED		100 * WALKING_SPEED
 /*-- These last two are for future features --*/
 #define WIN_ONSCREEN		1
 #define YIPE_ONSCREEN		2
@@ -85,7 +85,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MEDIUM_SPEED_FACTOR     3
 #define HARD_SPEED_FACTOR       5
 
-#define FISH_SPACING_EASY    90
+#define FISH_SPACING_EASY    150
 #define FISH_SPACING_MEDIUM  60
 #define FISH_SPACING_HARD    30
 

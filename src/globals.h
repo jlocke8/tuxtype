@@ -135,8 +135,8 @@ struct braille_dict
 
 /* Default values for game_option_type struct */
 /* They can be changed in the struct to other values at run-time */
-#define DEFAULT_FONT_NAME       "AndikaDesRevG.ttf"
-#define DEFAULT_GAME_FONT       "AndikaDesRevG.ttf" 
+#define DEFAULT_FONT_NAME       "Chock.ttf"
+#define DEFAULT_GAME_FONT       "Chock.ttf" 
 #define DEFAULT_MENU_FONT_SIZE	20
 #define GAME_FONT_SIZE	20
 #define DEFAULT_LOCALE	        "en_US.UTF-8"

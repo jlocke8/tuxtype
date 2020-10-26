@@ -61,6 +61,9 @@ const char* standby_path = "status/standby.svg";
 const char* title_path   = "title/title1.svg";
 const char* egg_path     = "title/egg.svg";
 const char* tux_path     = "tux/bigtux";
+
+char filename[256];
+
 /* beak coordinates relative to tux rect */
 const float beak_pos[4]  = {0.36, 0.21, 0.27, 0.14};
 
@@ -303,7 +306,9 @@ void TitleScreen(void)
     
     if (settings.menu_music)
     {
-        T4K_AudioMusicLoad("tuxi.ogg", -1);
+		sprintf(filename, "heavyguitar.mp3");
+		MusicLoad(filename, -1);
+       // T4K_AudioMusicLoad("tuxi.ogg", -1);
     }
 
     /* If necessary, have the user log in */

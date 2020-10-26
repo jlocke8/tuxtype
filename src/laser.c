@@ -42,7 +42,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define LEVEL_START_WAIT_START 20
 #define LASER_START 5
 #define NUM_ANS 8
-#define COMET_ZAP_FONT_SIZE 32
+#define COMET_ZAP_FONT_SIZE 155
 
 /* Local (to laser.c) 'globals': */
 static sprite* shield = NULL;
@@ -81,7 +81,7 @@ static void recalc_comet_pos(void);
 static void stop_tts_announcer();
 static int tts_announcer(void *unused);
 
-
+char filename[FNLEN];
 
 /* --- MAIN GAME FUNCTION!!! --- */
 
@@ -173,9 +173,17 @@ int PlayLaserGame(int diff_level)
 	tux_same_counter = 0;
 	ans_num = 0;
 
-	MusicPlay(musics[MUS_GAME + (rand() % NUM_MUSICS)], 0);
+	//MusicPlay(musics[MUS_GAME + (rand() % NUM_MUSICS)], 0);
 	
-
+      if (settings.sys_sound)
+      {
+        //TODO make use of more music files
+        if(rand() % 2) 
+          sprintf(filename, "war.mp3");
+        else
+          sprintf(filename, "darkskiesofdoom.mp3");
+        MusicLoad( filename, -1 );
+      }
 
 	 //Call announcer function in thread which annonces the word to type 
 	if(settings.tts)
@@ -1057,7 +1065,7 @@ static void laser_add_comet(int diff_level)
 static void laser_draw_let(wchar_t c, int x, int y)
 {
   /* Draw letter in correct place relative to comet: */
-  const int offset_x = -10; /* Values determined by trial and error: */
+  const int offset_x = -20; /* Values determined by trial and error: */
   const int offset_y = -50;
 
   SDL_Rect dst;

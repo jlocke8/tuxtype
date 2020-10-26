@@ -269,9 +269,9 @@ int PlayCascade(int diflevel)
       {
         //TODO make use of more music files
         if(rand() % 2) 
-          sprintf(filename, "amidst_the_raindrops.ogg");
+          sprintf(filename, "energeticopener.mp3");
         else
-          sprintf(filename, "chiptune2.ogg");
+          sprintf(filename, "Dubstep.mp3");
         MusicLoad( filename, -1 );
       }
 
@@ -634,10 +634,13 @@ int PlayCascade(int diflevel)
         next_tux_frame();
 //        SNOW_update();
         /* Do all pending blits and increment frame counter: */
-        UpdateScreen(&frame);
+        //UpdateScreen(&frame);
 
         EraseSprite( tux_object.spr[tux_object.state][tux_object.facing], tux_object.x, tux_object.y );
         EraseObject(temp_text[temp_text_count], text_rect.x, y_not);
+
+		  UpdateScreen(&frame);
+
 
         if (!settings.speed_up)
           WaitFrame();
@@ -1156,7 +1159,7 @@ static void SpawnFishies(int diflevel, int* fishies, int* frame)
   }
 
   /* See how long of a word will fit the length of our screen: */
-  max_length = screen->w / fish_sprite->frame[0]->w;
+  max_length = screen->w / (fish_sprite->frame[0]->w);
 
   do
   {
@@ -1178,7 +1181,7 @@ static void SpawnFishies(int diflevel, int* fishies, int* frame)
   fish_object[*fishies].len = wcslen(new_word); //using wchar_t[] now
   fish_object[*fishies].alive = 1;
   fish_object[*fishies].can_eat = 0;
-  fish_object[*fishies].w = fish_sprite->frame[0]->w * fish_object[*fishies].len;
+  fish_object[*fishies].w = (fish_sprite->frame[0]->w )* fish_object[*fishies].len;
   fish_object[*fishies].x = rand() % (screen->w - fish_object[*fishies].w);
   fish_object[*fishies].y = 0;
 
@@ -1358,8 +1361,8 @@ static void DrawFish(int which)
   int current_letter;
   /* 'x_inset' and 'y_inset' are where the glyph to be drawn relative        */
   /* the fish_sprite graphic:                                                      */
-  const int x_inset = 5;
-  const int y_inset = 0;
+  const int x_inset = -5;//5;
+  const int y_inset = 5;
   /* letter_x and letter_y are where the upper left corner of the glyph needs */
   /* to be located - (e.g. how SDL blitting understands locations)           */
   int letter_x = 0;
@@ -1383,7 +1386,7 @@ static void DrawFish(int which)
   for (j = 0; j < fish_object[which].len; j++)
   {
     DrawSprite( fish_sprite,
-                fish_object[which].x + (fish_sprite->frame[0]->w * j),
+                fish_object[which].x + ((fish_sprite->frame[0]->w + FISHY_FONT_SIZE/2) * j ),
                 fish_object[which].y);
   }
 
@@ -1426,7 +1429,7 @@ static void DrawFish(int which)
         letter_surface = GetWhiteGlyph(current_letter);
 
       /* Set "letter_x" and "letter_y to where we want the letter drawn: */
-      letter_x = fish_object[which].x + (j * fish_sprite->frame[0]->w) + x_inset;
+      letter_x = fish_object[which].x + (j * (fish_sprite->frame[0]->w + FISHY_FONT_SIZE/2) ) + x_inset;
 
       if (RTL())
 	letter_x = fish_object[which].x + ((length-1-j) * fish_sprite->frame[0]->w) + x_inset;
@@ -1447,7 +1450,12 @@ to their settings
 *****************************/
 static void MoveFishies(int *fishies, int *splats, int *lifes, int *frame)
 {
-  int i, j;
+  int i, j, k;
+  int length; 
+  int letter_x = 0;
+  int letter_y = 0;
+  int current_letter;
+	SDL_Surface *letter_surface;
 
   LOG("\nEntering MoveFishies()\n");
 
@@ -1455,10 +1463,20 @@ static void MoveFishies(int *fishies, int *splats, int *lifes, int *frame)
   {
     if (fish_object[i].alive) 
     {
-      for (j = 0; j < fish_object[i].len; j++)
-        EraseSprite( fish_sprite, fish_object[i].x + (fish_sprite->frame[0]->w*j), fish_object[i].y );
-	            
-      fish_object[i].y += fish_object[i].dy;
+      for (j = 0; j < fish_object[i].len; j++)	{	//erase all fishes on the screen
+			letter_x = fish_object[i].x + (j * fish_sprite->frame[0]->w) + -5;
+			letter_y = fish_object[i].y + 5;
+ 			EraseSprite( fish_sprite, fish_object[i].x + (fish_sprite->frame[0]->w*j), fish_object[i].y );
+		   length = wcslen(fish_object[i].word);
+			for(k = 0; k < length; k++){
+				current_letter = (int)fish_object[i].word[k];
+				letter_surface = GetWhiteGlyph(current_letter);
+				EraseObject(letter_surface, letter_x, letter_y);
+			}
+		
+
+		}
+      fish_object[i].y += fish_object[i].dy;		//move fish position down an increment
 	
       if (fish_object[i].y >= (screen->h) - fish_sprite->frame[fish_sprite->cur]->h - 1) 
          AddSplat( splats, &fish_object[i], lifes, frame );
@@ -2021,14 +2039,6 @@ static void set_braille_letter_pos(int fishies)
 		}
 		//Detecting the correct_position if word is not null
 		if (which != -1){
-			correct_position = 0;
-			for(i=0;i<tux_object.wordlen;i++)
-			{
-				if (tux_object.word[i] == fish_object[which].word[i])
-				{
-					correct_position+=1;
-				}
-			}
 			//Braille letter Position should be 2 if next letter is end
 			if (tux_object.wordlen == fish_object[which].len-1)
 				braille_letter_pos = 2;

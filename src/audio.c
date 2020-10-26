@@ -78,6 +78,7 @@ void MusicLoad(const char* musicFilename, int loops)
   if (!settings.sys_sound) return;
   if (!musicFilename) return;
 
+//  Mix_SetMusicCMD("ogg123");
   tmp_music = LoadMusic(musicFilename);
 
   if (tmp_music)
@@ -86,6 +87,8 @@ void MusicLoad(const char* musicFilename, int loops)
     defaultMusic = tmp_music;
     Mix_PlayMusic(defaultMusic, loops);
   }
+
+
 }
 
 

@@ -62,6 +62,9 @@ static char* activities[] = { ACTIVITIES };
 //const float button_gap = 0.2, text_h_gap = 0.4, text_w_gap = 0.5, button_radius = 0.27;
 //const int min_font_size = 8, default_font_size = 20, max_font_size = 33;
 
+char filename[256];
+
+
 /* menu title rect */
 SDL_Rect menu_title_rect;
 
@@ -193,9 +196,11 @@ int handle_activity(int act, int param)
     //redraw if necessary
     RenderTitleScreen();
 
-    if (settings.menu_music) //Turn menu music back on
-        T4K_AudioMusicLoad( "tuxi.ogg", T4K_AUDIO_LOOP_FOREVER );
-
+    if (settings.menu_music) {//Turn menu music back on
+		sprintf(filename, "heavyguitar.mp3");
+		MusicLoad(filename, -1);
+       // T4K_AudioMusicLoad( "tuxi.ogg", T4K_AUDIO_LOOP_FOREVER );
+	 }
     return 0;
 }
 
